@@ -12,12 +12,24 @@ repositories {
 	mavenCentral()
 }
 
+ext {
+	set('springCloudVersion', "Hoxton.SR4")
+}
+
 dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.cloud:spring-cloud-starter-config'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 	}
 }
 
